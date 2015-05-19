@@ -393,7 +393,7 @@
             // KEYWORD: /^(?:package|option|import|message|enum|extend|service|syntax|extensions|group)$/,
             RULE: /^(?:required|optional|repeated|map)$/,
             TYPE: /^(?:double|float|int32|uint32|sint32|int64|uint64|sint64|fixed32|sfixed32|fixed64|sfixed64|bool|string|bytes)$/,
-            NAME: /^[a-zA-Z_][a-zA-Z_0-9]*$/,
+            NAME: /^[a-zA-Z_][a-zA-Z_0-9\.]*$/,
             TYPEDEF: /^[a-zA-Z][a-zA-Z_0-9]*$/,
             TYPEREF: /^(?:\.?[a-zA-Z_][a-zA-Z_0-9]*)+$/,
             FQTYPEREF: /^(?:\.[a-zA-Z][a-zA-Z_0-9]*)+$/,
@@ -1843,11 +1843,11 @@
                                 /* not a ByteBuffer */ !(values instanceof ByteBuffer) &&
                                 /* not an ArrayBuffer */ !(values instanceof ArrayBuffer) &&
                                 /* not a Long */ !(ProtoBuf.Long && values instanceof ProtoBuf.Long)) {
-                                this.$set(values);
+                                this.$set(values, true);
                             } else // Set field values from arguments, in declaration order
                                 for (i=0, k=arguments.length; i<k; ++i)
                                     if (typeof (value = arguments[i]) !== 'undefined')
-                                        this.$set(fields[i].name, value); // May throw
+                                        this.$set(fields[i].name, value, true); // May throw
                         }
                     };
 
